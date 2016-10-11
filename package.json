@@ -1,0 +1,21 @@
+{
+  "name": "grepfrc",
+  "version": "1.0.0",
+  "description": "FRC Code Search",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.15.0",
+    "deasync": "^0.1.8",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "isbinaryfile": "^3.0.1",
+    "mongoose": "^4.6.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "process": "node process.js"
+  },
+  "author": "Erik Uhlmann",
+  "license": "MIT"
+}

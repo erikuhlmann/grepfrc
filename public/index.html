@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>GrepFRC</title>
+    </head>
+    <body>
+        <input id="search" type="text" />
+        <table>
+            <tr>
+                <th>Team</th>
+                <th>Year</th>
+                <th>Project</th>
+                <th>File</th>
+            </tr>
+            <tbody id="results"></tbody>
+        </table>
+        
+        <script>
+            var search = document.querySelector("#search");
+            var results = document.querySelector("#results");
+            search.addEventListener("change", function(){
+                fetch("/search?q=" + encodeURIComponent(this.value)).then(e=>e.json()).then(function(res){
+                    results.innerHTML = "";
+                    for(let item of res) {
+                        try {
+                        let tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${item.team}</td>
+                                <td>${item.year}</td>
+                                <td>${item.purpose}</td>
+                                <td><a target="_blank" href="data:text/plain;base64,${btoa(item.lines.join("\n"))}">${item.path}</a></td>`;
+                            results.appendChild(tr);
+                        } catch(e) {
+                            console.error(e);
+                        }
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
